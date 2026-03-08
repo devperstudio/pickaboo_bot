@@ -1,7 +1,0 @@
-2026/03/08-00:21:01.717 bb19 Reusing MANIFEST /home/devper/PycharmProjects/ecommerce_bot/chrome_profile/Default/IndexedDB/https_www.shwapno.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/03/08-00:21:01.717 bb19 Recovering log #3
-2026/03/08-00:21:01.717 bb19 Reusing old log /home/devper/PycharmProjects/ecommerce_bot/chrome_profile/Default/IndexedDB/https_www.shwapno.com_0.indexeddb.leveldb/000003.log 
-2026/03/08-00:21:01.729 bb1c Level-0 table #5: started
-2026/03/08-00:21:01.732 bb1c Level-0 table #5: 1891 bytes OK
-2026/03/08-00:21:01.736 bb1c Delete type=0 #3
-2026/03/08-00:21:01.736 bb19 Manual compaction at level-0 from '\x00\x03\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x04\x00\x00\x00' @ 0 : 0; will stop at (end)
