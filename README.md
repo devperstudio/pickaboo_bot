@@ -1,11 +1,10 @@
 # Pickaboo E-Commerce Bot
 
-An automated bot that searches for products on **Pickaboo**, matches them against a buy list, selects a color variant, and completes the full checkout flow — including auto-login.
+An automated bot that searches for products on [Pickaboo](https://www.pickaboo.com), matches them against a buy list, selects a color variant, and completes the full checkout flow — including auto-login.
 
 ---
 
-# Project Structure
-
+## Project Structure
 ```
 ecommerce_bot/
 │
@@ -27,72 +26,52 @@ ecommerce_bot/
 
 ---
 
-# Requirements
+## Requirements
 
-* Python **3.10+**
-* pip
+- Python 3.10+
+- pip
 
 ---
 
-# Installation
+## Installation
 
-## 1. Clone the repository
-
+### 1. Clone the repository
 ```bash
 git clone https://github.com/your-username/ecommerce_bot.git
 cd ecommerce_bot
 ```
 
-## 2. Create and activate a virtual environment
-
-Linux / macOS
-
+### 2. Create and activate a virtual environment
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate        # Linux / macOS
+.venv\Scripts\activate           # Windows
 ```
 
-Windows
-
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-```
-
----
-
-## 3. Install Python dependencies
-
+### 3. Install Python dependencies
 ```bash
 pip install playwright
 ```
 
----
-
-## 4. Install Playwright browsers
-
+### 4. Install Playwright browsers
 ```bash
 playwright install chromium
 ```
 
 ---
 
-# Configuration
+## Configuration
 
-## config.json — Login Credentials
-
-```
+### `config.json` — Login credentials
+```json
 {
     "phone": "01798589910",
     "password": "k1h1a1n1"
 }
 ```
 
----
-
-## buy.json — Products to Buy
-
-```
+### `buy.json` — Products to buy
+```json
 [
     {
         "title": "realme Note 70 4GB/64GB",
@@ -101,88 +80,67 @@ playwright install chromium
 ]
 ```
 
-Notes:
-
-* `title` must match the **exact product title** shown on Pickaboo.
-* `variant` is the **color name tooltip** (e.g. *Obsidian Black*, *Beach Gold*).
+- `title` must match the exact product title shown on Pickaboo
+- `variant` is the color name shown as tooltip (e.g. `Obsidian Black`, `Beach Gold`)
 
 ---
 
-# Usage
-
-Run the bot:
-
+## Usage
 ```bash
 python bot.py
 ```
 
 ---
 
-# Full Bot Flow
-
-1. Load `buy.json` and `config.json`
+## Full Bot Flow
+```
+1. Load buy.json and config.json
 2. Open Pickaboo in Chromium browser
 3. Attach global auto-login watcher
-
-For each keyword in `SEARCH_LIST`:
-
-1. Search for the product
-
-2. Scroll to load all results
-
-3. Scan and match against `TARGET_MODELS`
-
-4. If matched product exists in `buy.json`:
-
-   * Click the product
-   * Scrape and save full product details → `data/buydetails.json`
-   * Select color variant (example: **Obsidian Black**)
-   * Click **Buy Now**
-
-   If redirected to login page:
-
-   * Auto login using credentials
-
-   Continue checkout:
-
-   * Click **Proceed to checkout**
-   * Click **Place Order**
-   * Select **Cash on Delivery**
-   * Click **Confirm Order**
-   * Verify order success page
-
-5. Save all scanned products → `data/products.json`
+4. For each keyword in SEARCH_LIST:
+   a. Search for the product
+   b. Scroll to load all results
+   c. Scan and match against TARGET_MODELS
+   d. If matched product is in buy.json:
+      - Click on the product
+      - Scrape and save full product details → data/buydetails.json
+      - Select color variant (e.g. Obsidian Black)
+      - Click Buy Now
+        → Auto-login if redirected to login page
+      - Click Proceed to checkout
+      - Click Place Order
+      - Select Cash on Delivery
+      - Click Confirm Order
+      - Verify order success page
+5. Save all scanned products → data/products.json
+```
 
 ---
 
-# Auto-Login
+## Auto-Login
 
-The bot attaches a **global login watcher** to the browser page when it starts.
-
-If a login page is detected at any moment during the flow, the bot automatically:
+The bot attaches a **global login watcher** to the browser page at startup.
+If a login page is detected at any point during the flow, it automatically:
 
 1. Enters the phone number from `config.json`
-2. Clicks **Sign Up / Login**
+2. Clicks **Sign Up/Login**
 3. Enters the password
 4. Presses **Enter** to submit
 
-No manual interaction required.
+No manual intervention required.
 
 ---
 
-# Output Files
+## Output Files
 
-| File                   | Description                                    |
-| ---------------------- | ---------------------------------------------- |
-| `data/products.json`   | All matched products with title, price, rating |
+| File | Description |
+|------|-------------|
+| `data/products.json` | All matched products with title, price, rating |
 | `data/buydetails.json` | Full detail page data of the purchased product |
 
 ---
 
-# Git Setup
-
-Initialize repository:
-
+## Git Setup
 ```bash
 git init
 git add .
@@ -192,8 +150,7 @@ git remote add origin https://github.com/your-username/ecommerce_bot.git
 git push -u origin main
 ```
 
-Update after changes:
-
+To update after changes:
 ```bash
 git add .
 git commit -m "your message"
@@ -202,10 +159,9 @@ git push
 
 ---
 
-# .gitignore (Recommended)
+## .gitignore (recommended)
 
-Create a `.gitignore` file:
-
+Create a `.gitignore` file to avoid pushing sensitive or unnecessary files:
 ```
 .venv/
 __pycache__/
@@ -214,3 +170,5 @@ config.json
 *.pyc
 .DS_Store
 ```
+
+> **Note:** Never push `config.json` to a public repository — it contains your login credentials.
